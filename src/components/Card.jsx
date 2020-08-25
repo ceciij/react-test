@@ -1,27 +1,29 @@
 import React from 'react';
+import '../css/Card.css'
+import CurrentWeather from './CurrentWeather';
+import Clock from './Clock'
 
-function Card() {
+function Card(props) {
     return (
-        <div className="App">
-          <div>
-            Mexico City, Mexico Weather
-          </div>
-          <div>
-            Mexico City, Mexico Weather
-          </div>
-          <div>
-            Mexico City, Mexico Weather
-          </div>
-          <div>
-            Mexico City, Mexico Weather
-          </div>
-          <div>
-            Mexico City, Mexico Weather
-          </div>
-          as of 19:07 Central Daylight Time
-          17° Rain 20°/13°
-          feels like 12°
-        </div>
+      <section className="Card">
+        <h4>
+        {props.selectedCity}, Mexico
+        </h4>
+        <Clock/>
+        <h5>{props.time}</h5>
+        <CurrentWeather 
+        temp={props.temp} 
+        tempMax={props.tempMax} 
+        tempMin={props.tempMin}
+        icon={props.icon}
+        weather = {props.weather}
+        />   
+      <h6>Feels like {props.feelsLike}°</h6>
+      </section>
+    
+        
     );
 }
+
+export default Card;
 

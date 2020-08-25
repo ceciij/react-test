@@ -1,0 +1,13 @@
+
+.cont{
+    padding: 50px 50px;
+    overflow: scroll;
+}
+.items{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+

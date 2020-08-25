@@ -18,6 +18,9 @@
     font-weight: 600;
   }
   
+  .Card{
+    margin: 20px 20px;
+  }
   .Card h5 {
     font-weight: 400;
     opacity: 0.65;

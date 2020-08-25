@@ -1,0 +1,31 @@
+.form{
+  width: 40vw;
+}
+.form input[type=text], select {
+    width: 40%;
+    padding: 10px 12px;
+    margin: 0px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  .form  input[type=submit] {
+    width: 30%;
+    background-color: #417c9e;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+  }
+  
+  .form input[type=submit]:hover {
+    background-color: #417c9ea9;
+  }
+  
