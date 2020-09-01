@@ -1,83 +1,70 @@
-import React from 'react';    
-import Card from './Card';
-import Search from './Search'
+import React from 'react';
+import Router from './Router'
+
 import { getCityByNameAndCountry,
   getWeatherById,
-  kelvin2celsius,
-  getIcon
  } from '../helpers';
 import Loader from './Loader';
-import '../css/App.css'
+import '../css/App.css';
 
 class App extends React.Component {
 
   state = {
-    forecast: [],
+    forecasts: [],
     temp: 5,
     tempMax: 0,
     tempMin: 0,
     feelsLike:0 ,
     weather: '',
-    icon: 'cloudy.svg',
+    icon: '',
     selectedCity: '',
     id: 0,
   }
 
   async componentDidMount(){
   
-    const city = await getCityByNameAndCountry('Toluca', 'MX');
-    console.log(city)
-    const selectedCity = city.name
+    const city = await getCityByNameAndCountry('Ciudad de México', 'MX');
     const forecast = await getWeatherById(city.id)
-    const temp= kelvin2celsius(forecast.main.temp)
-    console.log(forecast)
-    const tempMax = kelvin2celsius(forecast.main.temp_max)
-    const tempMin = kelvin2celsius(forecast.main.temp_min)
-    const icon = getIcon(forecast.weather[0].main);
-    const feelsLike = kelvin2celsius(forecast.main.feels_like)
-    const weather = forecast.weather[0].main
-    const id = city.id
-      
+    // console.log(forecast)
     this.setState({
-      forecast,
-      temp,
-      tempMax,
-      tempMin,
-      feelsLike,
-      weather,
-      icon,
-      selectedCity,
-      id,
+      forecasts: [...this.state.forecasts, forecast],
+    })
+  
+  }
+  requestCity = async (name)=>{
+    const city = await getCityByNameAndCountry(name, 'MX');
+
+    if(!city) return;
+    const forecast = await getWeatherById(city.id);
+
+    this.setState({
+      forecasts: [...this.state.forecasts, forecast]
     })
 
+    console.log(this.state.forecasts)
+  }
+
+  deleteCard = (id) => {
+    // this.setState({
+    //   forecasts: forecasts.filter(id)
+    // })
+    console.log('delete' + id)
   }
 
   render(){
 
-    const {forecast} = this.state
-    const enteros = [1,2,3]
+    const {forecasts} = this.state
+    console.log(forecasts)
+    
     return(
-      this.state.forecast.length === 0
+      this.state.forecasts.length === 0
         ? <Loader/>
         : 
-      <div className = "cont">
-        <Search/>
-        <div className="items">
-          {enteros.map((data)=>
-            <Card 
-            key = {this.state.id}
-            temp={this.state.temp} 
-            tempMax={this.state.tempMax}
-            tempMin={this.state.tempMin}
-            icon={this.state.icon}
-            feelsLike={this.state.feelsLike}
-            weather = {this.state.weather}
-            selectedCity = {this.state.selectedCity}
-            />
-          )}
-        </div>
-
-      </div>
+        <Router 
+        forecasts={forecasts}
+        requestCity = {this.requestCity}
+        deleteCard = {this.deleteCard}
+        />
     )
   }
 }

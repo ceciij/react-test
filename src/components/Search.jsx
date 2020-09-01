@@ -1,21 +1,30 @@
 import React from 'react';
-import '../css/Search.css'
+import '../css/Search.css';
+import { func } from 'prop-types';
 
-function Search(props) {
+function Search({onSubmit}) {
+
+
+    const [value, setValue] = React.useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        onSubmit(value)
+        setValue('')
+        
+    }
     return(
         <div className = "form">
-            <form action="/action_page.php">
-                <input type="text" id="lname" name="lastname" placeholder="Toluca.."/>
-                {/* <label for="country">State</label>
-                <select id="country" name="country">
-                    <option value="australia">Toluca</option>
-                    <option value="canada">Guadalajara</option>
-                    <option value="usa">Ciudad de México</option>
-                </select> */}
-                <input type="submit" value="Search"/>
+            <form onSubmit={ e => handleSubmit(e)}>
+                <input type="text"  value={ value } onChange={ e => setValue(e.target.value) } placeholder="Toluca.."/>
+                <input type="submit" value="Get Forecast"/>
             </form>
         </div>
     )
 }
+
+Search.propTypes = {
+    onSubmit: func.isRequired,
+  }
 
 export default Search;

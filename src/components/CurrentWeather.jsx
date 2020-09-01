@@ -3,7 +3,7 @@ import '../css/CurrentWeather.css'
 
 
 //destructuring in the props
-function CurrentWeather({temp, tempMax, tempMin, icon, weather}){
+function CurrentWeather({temp, tempMax, tempMin, icon, weather}){    
 
 
     return(

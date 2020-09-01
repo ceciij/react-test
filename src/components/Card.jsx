@@ -1,11 +1,14 @@
 import React from 'react';
-import '../css/Card.css'
+import '../css/Card.css';
 import CurrentWeather from './CurrentWeather';
-import Clock from './Clock'
+import Clock from './Clock';
+import Button from './Button'
 
 function Card(props) {
+
     return (
       <section className="Card">
+        <Button onClick = { props.onClick }/>
         <h4>
         {props.selectedCity}, Mexico
         </h4>
